@@ -8,4 +8,5 @@ Recepty půjde zobrazovat na mobilním a desktopovém zařízení
 K receptu půjde přidávat poznámky
 Recepty půjde exportovat do tisknutelného formátu
 Recepty budou dostupné na sití, minimálně lokální
+Možnost zálohování databáze
 

@@ -6,3 +6,4 @@ SCREENY
 2. Zobrazení seznamu receptů
 	V záhlaví s polem pro vyhledávání receptu, filtrování podle tagů
 3. Zobrazení pro editaci receptu
+4. Management screen - zálohování DB
