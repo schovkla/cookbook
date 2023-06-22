@@ -1,0 +1,8 @@
+SCREENY
+1. zobrazení jednotlivého receptu
+	S ikonkou pro editaci
+	Obsahuje tlačítko pro škálování ingrediencí
+	Skládá se z názvu, ingrediencí, postupu a poznámky
+2. Zobrazení seznamu receptů
+	V záhlaví s polem pro vyhledávání receptu, filtrování podle tagů
+3. Zobrazení pro editaci receptu
