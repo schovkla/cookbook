@@ -1,0 +1,6 @@
+Web-based application
+Main language python
+Database - SQLite
+Frameworks Django
+Javascript, HTML, CSS, JQuery
+Git
