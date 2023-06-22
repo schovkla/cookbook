@@ -1,0 +1,11 @@
+Databáze receptů
+CRUD receptů
+Recept bude obsahovat název, ingredience a postup
+Ingredience půjde škálovat
+Recepty půjde tagovat
+Recepty půjde vyhledávat podle jména
+Recepty půjde zobrazovat na mobilním a desktopovém zařízení
+K receptu půjde přidávat poznámky
+Recepty půjde exportovat do tisknutelného formátu
+Recepty budou dostupné na sití, minimálně lokální
+
