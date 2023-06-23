@@ -42,9 +42,17 @@ class Step(models.Model):
         return self.description
 
 
+class Unit(models.Model):
+    name = models.CharField(max_length=63, verbose_name=_("Name"))
+
+    class Meta:
+        verbose_name = _("Unit")
+        verbose_name_plural = _("Units")
+
+
 class Amount(models.Model):
     value = models.FloatField(default=0, verbose_name=_("Value"))
-    unit = models.CharField(max_length=63, verbose_name=_("Unit"))
+    unit = models.ForeignKey(Unit, on_delete=models.CASCADE, related_name="+", verbose_name=_("Unit"))
     recipe = models.ForeignKey("cookbook_app.Recipe", on_delete=models.CASCADE, related_name="amount",
                                verbose_name=_("Recipe"))
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name="amount",
