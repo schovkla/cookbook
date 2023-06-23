@@ -5,7 +5,7 @@ from django_extensions.db.models import TimeStampedModel
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=127, verbose_name=_("Name"))
+    name = models.CharField(max_length=127, verbose_name=_("Name"), unique=True)
     color = ColorField(defaul="#0000FF", verbose_name=_("Color"))
 
     class Meta:
@@ -17,7 +17,7 @@ class Tag(models.Model):
 
 
 class Ingredient(models.Model):
-    name = models.CharField(max_length=127, verbose_name=_("Name"))
+    name = models.CharField(max_length=127, verbose_name=_("Name"), unique=True)
 
     class Meta:
         verbose_name = _("Ingredient")
@@ -36,6 +36,7 @@ class Step(models.Model):
     class Meta:
         verbose_name = _("Step")
         verbose_name_plural = _("Steps")
+        unique_together = ("order", "recipe")
 
     def __str__(self):
         return self.description
@@ -55,7 +56,7 @@ class Amount(models.Model):
 
 
 class Recipe(TimeStampedModel):
-    name = models.CharField(max_length=127, verbose_name=_("Name"))
+    name = models.CharField(max_length=127, verbose_name=_("Name"), unique=True)
     note = models.TextField(null=True, blank=True, verbose_name=_("Note"))
     tags = models.ManyToManyField(Tag, related_name='recipes', blank=True, verbose_name=_("Tags"))
     ingredients = models.ManyToManyField(Ingredient, through=Amount, related_name='recipes', blank=True,
