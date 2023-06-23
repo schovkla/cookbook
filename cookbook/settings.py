@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cookbook_app.apps.CookbookAppConfig',
     'colorfield',
+     'django_extensions',
 ]
 
 MIDDLEWARE = [
