@@ -6,7 +6,7 @@ from django_extensions.db.models import TimeStampedModel
 
 class Tag(models.Model):
     name = models.CharField(max_length=127, verbose_name=_("Name"), unique=True)
-    color = ColorField(defaul="#0000FF", verbose_name=_("Color"))
+    color = ColorField(default="#0000FF", verbose_name=_("Color"))
 
     class Meta:
         verbose_name = _("Tag")
