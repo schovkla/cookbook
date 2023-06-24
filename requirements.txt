@@ -9,4 +9,3 @@ K receptu půjde přidávat poznámky
 Recepty půjde exportovat do tisknutelného formátu
 Recepty budou dostupné na sití, minimálně lokální
 Možnost zálohování databáze
-
