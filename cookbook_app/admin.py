@@ -5,6 +5,8 @@ import cookbook_app.models
 from cookbook_app.models import Tag, Ingredient, Recipe, Unit, Step
 
 
+# TODO: Migrate admin to Baton
+
 # Register your models here.
 
 @admin.register(Tag)
