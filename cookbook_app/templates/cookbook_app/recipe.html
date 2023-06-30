@@ -1,5 +1,28 @@
 {% extends "cookbook_app/main.html" %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/notice_card.css' %}">
+{% endblock %}
 {% block content %}
+{#    <style>#}
+{#      @import url("static/css/notice_card.css");#}
+{#    </style>#}
+{#    <link rel="stylesheet" type="text/css" href="{% static 'css/notice_card.css' %}">#}
+    <h1>{{ object.name }}</h1>
+
+    {#    TODO: Create nice web page for recipe#}
     Recipe
+
+    <div class="row">
+        <div class="col-md-4 col-sm-6 content-card">
+            <div class="notice-card-shadow">
+                <div class="notice-card card-information">
+                    <div class="content">
+                        <p class="description">{{ object.note }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

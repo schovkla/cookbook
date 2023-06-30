@@ -1,0 +1,57 @@
+.notice-card-shadow {
+
+    max-width: 350px;
+
+    position: relative;
+
+}
+
+.content-card {
+
+    margin-top: 30px;
+
+    margin-left: 50px;
+
+}
+
+.notice-card {
+
+    border-radius: 8px;
+
+    box-shadow: 0 2px 8px rgba(164, 164, 0, 0.5);
+
+
+    color: #252422;
+
+    margin-bottom: 20px;
+
+    position: relative;
+
+    z-index: 1;
+
+    background: #FCEBA6;
+
+}
+
+
+.notice-card.card-information .content {
+
+    padding: 40px 55px;
+
+    text-align: center;
+
+}
+
+.notice-card .content {
+
+    padding: 20px 20px 10px 20px;
+
+}
+
+.notice-card .description {
+
+    font-size: 16px;
+
+    color: #66615b;
+
+}
