@@ -1,0 +1,10 @@
+{% load i18n %}
+
+<div class="list-group">
+    <div class="list-group-item">
+        <h4 class="list-group-item-heading float-start m-1">{% trans "Tags" %}</h4>
+        {% for tag in recipe.tags.all %}
+            <span class="badge rounded-pill  bg-primary">{{ tag }}</span>
+        {% endfor %}
+    </div>
+</div>

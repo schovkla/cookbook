@@ -1,43 +1,14 @@
 {% extends "cookbook_app/main.html" %}
 {% load static %}
-{%  load i18n %}
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/notice_card.css' %}">
 {% endblock %}
 {% block content %}
     <h1 class="display-3">{{ recipe.name }}</h1>
-
-    <div class="list-group">
-        <div class="list-group-item">
-            <h4 class="list-group-item-heading float-start m-1">{% trans "Ingredients" %}</h4>
-            <ul class="list-group float-start">
-                {% for ingredient in recipe.ingredients.all %}
-                    <li class="list-group-item">{{ ingredient }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-
+    {% block ingredients %}{% include 'cookbook_app/ingredients.html' %}{% endblock %}
+    {% block steps %}{% include 'cookbook_app/steps.html' %}{% endblock %}
+    {% block tags %}{% include 'cookbook_app/tags.html' %}{% endblock %}
+    {% block note %}{% include 'cookbook_app/note.html' %}{% endblock %}
     {#    TODO: Create nice web page for recipe#}
-    <div class="list-group">
-        <h4 class="list-group-item list-group-item-primary">{% trans "Instructions" %}</h4>
-        <ol class="list-group list-group-numbered m-0">
-            {% for step in recipe.steps.all %}
-                <li class="list-group-item">{{ step }}</li>
-            {% endfor %}
-        </ol>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4 col-sm-6 content-card">
-            <div class="notice-card-shadow">
-                <div class="notice-card card-information">
-                    <div class="content">
-                        <p class="description">{{ recipe.note }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 {% endblock %}
 
