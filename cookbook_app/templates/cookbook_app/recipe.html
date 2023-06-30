@@ -2,16 +2,26 @@
 {% load static %}
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/notice_card.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/recipe_detail.css' %}">
 {% endblock %}
 {% block content %}
-{#    <style>#}
-{#      @import url("static/css/notice_card.css");#}
-{#    </style>#}
-{#    <link rel="stylesheet" type="text/css" href="{% static 'css/notice_card.css' %}">#}
-    <h1>{{ object.name }}</h1>
+    {#    <style>#}
+    {#      @import url("static/css/notice_card.css");#}
+    {#    </style>#}
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'css/notice_card.css' %}">#}
+    <h1 class="display-3">{{ object.name }}</h1>
 
     {#    TODO: Create nice web page for recipe#}
     Recipe
+
+
+
+    <ol class=" list-group list-group-numbered">
+        {% for step in steps %}
+            <li class="list-group-item">{{ step }}</li>
+
+        {% endfor %}
+    </ol>
 
     <div class="row">
         <div class="col-md-4 col-sm-6 content-card">
