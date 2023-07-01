@@ -4,11 +4,24 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/notice_card.css' %}">
 {% endblock %}
 {% block content %}
-    <h1 class="display-3">{{ recipe.name }}</h1>
-    {% block ingredients %}{% include 'cookbook_app/ingredients.html' %}{% endblock %}
-    {% block steps %}{% include 'cookbook_app/steps.html' %}{% endblock %}
-    {% block tags %}{% include 'cookbook_app/tags.html' %}{% endblock %}
-    {% block note %}{% include 'cookbook_app/note.html' %}{% endblock %}
+    <div class="container align-items-center justify-content-center">
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="display-3">{{ recipe.name }}</h1>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-link"><span class="bi bi-pencil"></span></button>
+                    <button type="button" class="btn btn-link"><span class="bi bi-house"></span></button>
+                </div>
+            </div>
+        </div>
+        {% block ingredients %}{% include 'cookbook_app/ingredients.html' %}{% endblock %}
+        {% block steps %}{% include 'cookbook_app/steps.html' %}{% endblock %}
+        {% block tags %}{% include 'cookbook_app/tags.html' %}{% endblock %}
+        {% block note %}{% include 'cookbook_app/note.html' %}{% endblock %}
+    </div>
     {#    TODO: Create nice web page for recipe#}
 {% endblock %}
 
