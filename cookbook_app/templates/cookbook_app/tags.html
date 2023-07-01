@@ -2,9 +2,9 @@
 
 <div class="list-group">
     <div class="list-group-item">
-        <h4 class="list-group-item-heading float-start m-1">{% trans "Tags" %}</h4>
+        <h4 class="list-group-item-heading float-start me-3">{% trans "Tags" %}</h4>
         {% for tag in recipe.tags.all %}
-            <span class="badge rounded-pill  bg-primary">{{ tag }}</span>
+            <span class="badge rounded-pill  bg-primary fs-5">{{ tag }}</span>
         {% endfor %}
     </div>
 </div>
