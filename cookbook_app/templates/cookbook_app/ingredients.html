@@ -3,15 +3,29 @@
 <div class="list-group">
     <div class="list-group-item">
         <div class="list-group-item-heading float-start m-1">
-        <h4>{% trans "Ingredients" %}</h4>
-        <button type="button" class="btn btn-link"><span class="bi bi-plus-slash-minus"></span></button>
+            <h4>{% trans "Ingredients" %}</h4>
+            <button type="button" class="btn btn-link"><span class="bi bi-plus-slash-minus"></span></button>
 
         </div>
+        <div class="list-group-item float-start">
+            <table class="table float-start">
+                <tbody>
+                {% for ingredient in recipe.ingredients.all %}
+                    <tr>
+                        <td>{{ ingredient.amount.first.value }}</td>
+                        <td>{{ ingredient.amount.first.unit.name }}</td>
+                        <td></td>
+                        <td  class="ps-5">{{ ingredient }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-        <ul class="list-group float-start">
-            {% for ingredient in recipe.ingredients.all %}
-                <li class="list-group-item">{{ ingredient }} {{ ingredient.amount.first.value }} {{ ingredient.amount.first.unit.name }}</li>
-            {% endfor %}
-        </ul>
+        {#        <ul class="list-group float-start">#}
+        {#            {% for ingredient in recipe.ingredients.all %}#}
+        {#                <li class="list-group-item">{{ ingredient }} {{ ingredient.amount.first.value }} {{ ingredient.amount.first.unit.name }}</li>#}
+        {#            {% endfor %}#}
+        {#        </ul>#}
     </div>
 </div>
