@@ -5,14 +5,15 @@
 {% endblock %}
 {% block content %}
     <div class="container align-items-center justify-content-center">
-
         <div class="container">
             <div class="row">
                 <div class="col text-center">
                     <h1 class="display-3">{{ recipe.name }}</h1>
                 </div>
                 <div class="col-auto d-flex justify-content-end">
-                    <button type="button" class="btn btn-link"><span class="bi bi-pencil"></span></button>
+                    <button type="button" class="btn btn-link"
+                            onclick="window.open('{% url "admin:cookbook_app_recipe_change" recipe.id %}', '_blank')">
+                        <span class="bi bi-pencil"></span></button>
                     <button type="button" class="btn btn-link"><span class="bi bi-house"></span></button>
                 </div>
             </div>
