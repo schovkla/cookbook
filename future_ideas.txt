@@ -1,1 +1,3 @@
-Ingredience půjde sdružovat do skupin, např. těsto a krém
+* Ingredience půjde sdružovat do skupin, např. těsto a krém
+* Tagy v receptu budou klikatelné
+
