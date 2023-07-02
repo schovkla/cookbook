@@ -4,7 +4,8 @@
     <div class="list-group-item">
         <div class="list-group-item-heading float-start m-1">
             <h4>{% trans "Ingredients" %}</h4>
-            <button type="button" class="btn btn-link"><span class="bi bi-plus-slash-minus"></span></button>
+            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#scalingModal"><span
+                    class="bi bi-plus-slash-minus"></span></button>
 
         </div>
         <div class="list-group-item float-start">
@@ -12,20 +13,61 @@
                 <tbody>
                 {% for ingredient in recipe.ingredients.all %}
                     <tr>
-                        <td>{{ ingredient.amount.first.value }}</td>
+                        <td class="ingredient-amount d-none"
+                            data-default="{{ ingredient.amount.first.value|floatformat }}">{{ ingredient.amount.first.value|floatformat:"0.##" }}</td>
                         <td>{{ ingredient.amount.first.unit.name }}</td>
                         <td></td>
-                        <td  class="ps-5">{{ ingredient }}</td>
+                        <td class="ps-5">{{ ingredient }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
 
-        {#        <ul class="list-group float-start">#}
-        {#            {% for ingredient in recipe.ingredients.all %}#}
-        {#                <li class="list-group-item">{{ ingredient }} {{ ingredient.amount.first.value }} {{ ingredient.amount.first.unit.name }}</li>#}
-        {#            {% endfor %}#}
-        {#        </ul>#}
+        <!-- Scaling Modal -->
+        <div class="modal fade" id="scalingModal" tabindex="-1" aria-labelledby="scalingModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="scalingModalLabel">{% trans "Select Scaling Factor" %}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% for factor_name, factor_value in scalingFactors.items %}
+                            <div class="form-check">
+                                <input class="form-check-input  " type="radio" name="scalingFactor"
+                                       id="scalingFactor{{ forloop.counter }}" value="{{ factor_value }}"
+                                       {% if factor_value == 1 %}checked{% endif %}
+                                       onchange="scaleValues()">
+                                <label class="form-check-label"
+                                       for="scalingFactor{{ forloop.counter }}">{{ factor_name }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            function scaleValues() {
+                const selectedFactor = document.querySelector('input[name="scalingFactor"]:checked').value;
+                const valueElements = document.getElementsByClassName('ingredient-amount');
+                for (let i = 0; i < valueElements.length; i++) {
+                    let value = parseFloat(valueElements[i].dataset.default) * selectedFactor;
+                    if (value % 1 === 0) {
+                        value = value.toFixed(0);
+                    } else if ((value * 10) % 1 === 0) {
+                        value = value.toFixed(1);
+                    } else {
+                        value = value.toFixed(2);
+                    }
+                    valueElements[i].textContent = value;
+                    valueElements[i].classList.remove("d-none");
+                }
+            }
+
+            window.addEventListener('DOMContentLoaded', scaleValues);
+        </script>
     </div>
 </div>
