@@ -13,10 +13,13 @@
                 <tbody>
                 {% for ingredient in recipe.ingredients.all %}
                     <tr>
-                        <td class="ingredient-amount d-none"
-                            data-default="{{ ingredient.amount.first.value|floatformat }}">{{ ingredient.amount.first.value|floatformat:"0.##" }}</td>
-                        <td>{{ ingredient.amount.first.unit.name }}</td>
-                        <td></td>
+                        <td class="d-none ingredient-amount">
+                            <span class="ingredient-value"
+                                  data-default="{{ ingredient.amount.first.value|floatformat }}">
+                            {{ ingredient.amount.first.value|floatformat:"0.##" }}
+                            </span>
+                            {{ ingredient.amount.first.unit.name }}
+                        </td>
                         <td class="ps-5">{{ ingredient }}</td>
                     </tr>
                 {% endfor %}
@@ -52,7 +55,8 @@
         <script>
             function scaleValues() {
                 const selectedFactor = document.querySelector('input[name="scalingFactor"]:checked').value;
-                const valueElements = document.getElementsByClassName('ingredient-amount');
+                const valueElements = document.getElementsByClassName('ingredient-value');
+                const amountElements = document.getElementsByClassName('ingredient-amount');
                 for (let i = 0; i < valueElements.length; i++) {
                     let value = parseFloat(valueElements[i].dataset.default) * selectedFactor;
                     if (value % 1 === 0) {
@@ -63,7 +67,7 @@
                         value = value.toFixed(2);
                     }
                     valueElements[i].textContent = value;
-                    valueElements[i].classList.remove("d-none");
+                    amountElements[i].classList.remove("d-none");
                 }
             }
 
