@@ -19,20 +19,9 @@
             </a>
 
         </div>
-        <ul id="recipe-list" class="list-group">
-            {% for recipe in recipes %}
-                <a class=" list-group-item d-flex justify-content-between align-items-center list-group-item-action text-decoration-none"
-                   href="{% url 'recipe' recipe.pk %}"><span>{{ recipe.name }}</span>
-
-                    <button type="button" class="btn btn-link"
-                            onclick="window.open('{% url "admin:cookbook_app_recipe_change" recipe.id %}', '_blank')">
-                        <span class="bi bi-pencil"></span></button>
-                </a>
-            {% empty %}
-                <p>{% trans "No recipes found." %}</p>
-            {% endfor %}
-
-        </ul>
+        <div id="recipe-list">
+            {% include "cookbook_app/recipes_list.html" %}
+        </div>
     </div>
 
     <script>
@@ -45,26 +34,10 @@
             event.preventDefault();
             const query = searchInput.value;
 
-            // Send AJAX request to the server
             fetch("{% url 'search_recipes' %}?query=" + encodeURIComponent(query))
-                .then(response => response.json())
-                .then(data => {
-                    recipeList.innerHTML = '';
-                    if (data.length === 0) {
-                        recipeList.innerHTML = "<p>No recipes found.</p>";
-                    } else {
-                        data.forEach(recipe => {
-                            const recipeItem = document.createElement('a');
-                            recipeItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center", "list-group-item-action", "text-decoration-none");
-                            recipeItem.href = `/recipe/${recipe.pk}`;
-                            recipeItem.innerHTML = `<span>${recipe.name}</span>
-                                <button type="button" class="btn btn-link"
-                                        onclick="window.open('/admin/recipe/${recipe.id}/change', '_blank')">
-                                    <span class="bi bi-pencil"></span>
-                                </button>`;
-                            recipeList.appendChild(recipeItem);
-                        });
-                    }
+                .then(response => response.text())
+                .then(html => {
+                    recipeList.innerHTML = html;
                 })
                 .catch(error => {
                     console.error("Error:", error);
