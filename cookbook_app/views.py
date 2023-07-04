@@ -7,6 +7,8 @@ from django.views.generic import DetailView, ListView
 from cookbook_app.models import Recipe
 from django.http import JsonResponse
 
+from unidecode import unidecode
+
 
 class RecipeView(DetailView):
     template_name = "cookbook_app/recipe.html"
@@ -35,13 +37,18 @@ class RecipeListView(ListView):
 
 
 class SearchRecipeView(View):
+    def filter_unaccented(self, query, data):
+        pass
+
     def get(self, request, *args, **kwargs):
         query = request.GET.get('query', '')
-        # TODO: make it czech accents insensitive
         try:
             search_results = Recipe.objects.filter(name__unaccent__icontains=query).order_by("name")
         except django.core.exceptions.FieldError:
-            search_results = Recipe.objects.filter(name__icontains=query).order_by("name")
+            all_recipes = list(Recipe.objects.order_by("name"))
+            search_results = filter(
+                lambda recipe: unidecode(query).lower().strip() in unidecode(recipe.name).lower().strip(),
+                all_recipes)
 
         context = {"recipes": search_results}
         return render(request, "cookbook_app/recipes_list.html", context)
