@@ -1,15 +1,15 @@
 {% load i18n %}
 
 <div class="list-group">
-    <div class="list-group-item">
+    <div class="list-group-item border-0">
         <div class="list-group-item-heading float-start m-1">
             <h4>{% trans "Ingredients" %}</h4>
             <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#scalingModal"><span
                     class="bi bi-plus-slash-minus"></span></button>
 
         </div>
-        <div class="list-group-item float-start">
-            <table class="table float-start">
+        <div class="list-group-item float-start border-0">
+            <table class="table float-start ">
                 <tbody>
                 {% for ingredient in recipe.ingredients.all %}
                     <tr>
