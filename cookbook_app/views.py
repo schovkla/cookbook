@@ -1,3 +1,4 @@
+import django.core.exceptions
 from django.shortcuts import render
 from django.views import View
 
@@ -37,6 +38,10 @@ class SearchRecipeView(View):
     def get(self, request, *args, **kwargs):
         query = request.GET.get('query', '')
         # TODO: make it czech accents insensitive
-        search_results = Recipe.objects.filter(name__icontains=query).order_by("name")
+        try:
+            search_results = Recipe.objects.filter(name__unaccent__icontains=query).order_by("name")
+        except django.core.exceptions.FieldError:
+            search_results = Recipe.objects.filter(name__icontains=query).order_by("name")
+
         context = {"recipes": search_results}
         return render(request, "cookbook_app/recipes_list.html", context)
