@@ -36,7 +36,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        {% for factor_name, factor_value in scalingFactors.items %}
+                        {% for factor_name, factor_value in scaling_factors.items %}
                             <div class="form-check">
                                 <input class="form-check-input  " type="radio" name="scalingFactor"
                                        id="scalingFactor{{ forloop.counter }}" value="{{ factor_value }}"

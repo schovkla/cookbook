@@ -14,7 +14,7 @@ class RecipeView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context["scalingFactors"] = {
+        context["scaling_factors"] = {
             "1/4": 0.25,
             "1/2": 0.5,
             "2/3": 2 / 3,
@@ -37,6 +37,6 @@ class SearchRecipeView(View):
     def get(self, request, *args, **kwargs):
         query = request.GET.get('query', '')
         # TODO: make it czech accents insensitive
-        search_results = Recipe.objects.filter(name__icontains=query)
+        search_results = Recipe.objects.filter(name__icontains=query).order_by("name")
         context = {"recipes": search_results}
         return render(request, "cookbook_app/recipes_list.html", context)
