@@ -49,6 +49,9 @@ class Unit(models.Model):
         verbose_name = _("Unit")
         verbose_name_plural = _("Units")
 
+    def __str__(self):
+        return self.name
+
 
 class Amount(models.Model):
     value = models.FloatField(default=0, verbose_name=_("Value"))
