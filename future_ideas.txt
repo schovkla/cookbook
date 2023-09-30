@@ -1,5 +1,7 @@
 * Ingredience půjde sdružovat do skupin, např. těsto a krém
 * Tagy v receptu budou klikatelné
-* Do poznamky v receptu pujde rovnou psat.
 * Vyhledavat pujde podle tagu
 * pujde pridat k receptu fotka
+* Rozdelit tagy zvlast u receptu a u vyhledavani
+* Tagy u vyhledavani budou multiple choice
+* Pridat vyhledavani pri psani bez search buttonu

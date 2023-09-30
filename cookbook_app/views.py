@@ -2,7 +2,6 @@ import django.core.exceptions
 from django.shortcuts import render
 from django.views import View
 
-from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DetailView, ListView
 
 from cookbook_app.models import Recipe, Tag
@@ -43,11 +42,8 @@ class RecipeListView(ListView):
 
 
 class SearchRecipeView(View):
-    def filter_unaccented(self, query, data):
-        pass
-
-    def get(self, request, *args, **kwargs):
-        query = request.GET.get('query', '')
+    def post(self, request, *args, **kwargs):
+        query = request.POST.get("query", "")
         try:
             search_results = Recipe.objects.filter(name__unaccent__icontains=query).order_by("name")
         except django.core.exceptions.FieldError:
