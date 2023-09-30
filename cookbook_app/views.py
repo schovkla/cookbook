@@ -5,10 +5,11 @@ from django.views import View
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DetailView, ListView
 
-from cookbook_app.models import Recipe
+from cookbook_app.models import Recipe, Tag
 from django.http import JsonResponse
 
 from unidecode import unidecode
+
 
 class RecipeView(DetailView):
     template_name = "cookbook_app/recipe.html"
@@ -34,6 +35,11 @@ class RecipeListView(ListView):
     model = Recipe
     context_object_name = "recipes"
     ordering = ["name"]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context["all_tags"] = Tag.objects.all()
+        return context
 
 
 class SearchRecipeView(View):

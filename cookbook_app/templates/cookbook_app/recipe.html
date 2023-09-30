@@ -21,7 +21,7 @@
         </div>
         {% include 'cookbook_app/ingredients.html' %}
         {% include 'cookbook_app/steps.html' %}
-        {% include 'cookbook_app/tags.html' %}
+        {% include 'cookbook_app/tags.html' with tags=recipe.tags.all %}
         {% include 'cookbook_app/note.html' %}
     </div>
 {% endblock %}

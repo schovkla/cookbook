@@ -12,12 +12,16 @@
                            placeholder="Search recipes"
                            aria-label="Search">
                     <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                    <button class="btn btn-secondary ms-1" id="tags-toggle"><i class="bi bi-hash"></i></button>
                 </div>
             </form>
             <a href="{% url "admin:cookbook_app_recipe_add" %}" target="_blank" class="btn btn-link">
                 <span class="bi bi-file-earmark-plus fs-2"></span>
             </a>
 
+        </div>
+        <div id="tags-list" class="d-none">
+            {% include 'cookbook_app/tags.html' with tags=all_tags %}
         </div>
         <div id="recipe-list">
             {% include "cookbook_app/recipes_list.html" %}
@@ -44,4 +48,5 @@
                 });
         });
     </script>
+    <script src="{% static 'js/recipes.js' %}"></script>
 {% endblock %}
