@@ -5,3 +5,4 @@
 * Rozdelit tagy zvlast u receptu a u vyhledavani
 * Tagy u vyhledavani budou multiple choice
 * Pridat vyhledavani pri psani bez search buttonu
+* Update to jquery selectors

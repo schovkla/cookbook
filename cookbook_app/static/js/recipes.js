@@ -17,8 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             dataType: "html",
             success: function (data) {
                 recipeList.innerHTML = data;
-            },
-            error: function (data) {
+            }, error: function (data) {
                 alert('Error while updating recipes list.');
             },
         });
@@ -29,6 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
         update_recipe_list();
     });
 
+    searchInput.addEventListener("input", function (event) {
+        update_recipe_list();
+    })
 
     let tagsList = $("#tags-list");
 
