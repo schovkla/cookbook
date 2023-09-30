@@ -1,11 +1,15 @@
+{% load static %}
+{% load i18n %}
 <div class="row d-flex justify-content-center">
     <div class="col-md-4 col-sm-6 content-card">
         <div class="notice-card-shadow">
             <div class="notice-card card-information">
-                <div class="content">
+                <div class="content" id="recipe_note" data-recipe-id="{{ recipe.id }}">
+                    {% csrf_token %}
                     <p class="description">{{ recipe.note }}</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="{% static 'js/note.js' %}"></script>

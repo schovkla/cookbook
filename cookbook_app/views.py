@@ -2,13 +2,13 @@ import django.core.exceptions
 from django.shortcuts import render
 from django.views import View
 
+from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DetailView, ListView
 
 from cookbook_app.models import Recipe
 from django.http import JsonResponse
 
 from unidecode import unidecode
-
 
 class RecipeView(DetailView):
     template_name = "cookbook_app/recipe.html"
@@ -52,3 +52,17 @@ class SearchRecipeView(View):
 
         context = {"recipes": search_results}
         return render(request, "cookbook_app/recipes_list.html", context)
+
+
+class UpdateNoteView(View):
+    def post(self, request, *args, **kwargs):
+        recipe_id = request.POST.get("recipe_id", None)
+        new_note = request.POST.get("new_note", "")
+
+        try:
+            recipe = Recipe.objects.get(pk=recipe_id)
+            recipe.note = new_note
+            recipe.save()
+            return JsonResponse({"success": True})
+        except Recipe.DoesNotExist:
+            return JsonResponse({"success": False, "error": "Recipe does not exists"})
