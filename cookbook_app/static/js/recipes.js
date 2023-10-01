@@ -7,12 +7,22 @@ document.addEventListener("DOMContentLoaded", function () {
     function update_recipe_list() {
         const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
         const query = searchInput.value;
+        const selectedTags = [];
+        const tagSelectors = document.querySelectorAll('.tag-selector');
+        tagSelectors.forEach(function (tag_selector) {
+            // Check if the checkbox is checked
+            if (tag_selector.checked) {
+                const tagId = tag_selector.getAttribute('id');
+                selectedTags.push(tagId);
+            }
+        });
         $.ajax({
             url: endpoint_url,
             method: "POST",
             data: {
                 csrfmiddlewaretoken: csrfToken,
                 query: query,
+                selected_tags: selectedTags,
             },
             dataType: "html",
             success: function (data) {
@@ -37,4 +47,31 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#tags-toggle").click(function () {
         tagsList.toggleClass("d-none");
     })
+
+
+    // Update labels classes on click
+    function updateLabelClasses() {
+        const checkboxes = document.querySelectorAll('.btn-check');
+        checkboxes.forEach((checkbox) => {
+            const tagId = checkbox.getAttribute('id');
+            const label = document.querySelector(`[for="${tagId}"]`);
+
+            if (checkbox.checked) {
+                label.classList.remove('bg-secondary');
+                label.classList.add('bg-primary');
+            } else {
+                label.classList.remove('bg-primary');
+                label.classList.add('bg-secondary');
+            }
+            update_recipe_list();
+        });
+    }
+
+    const checkboxes = document.querySelectorAll('.btn-check');
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', updateLabelClasses);
+    });
+
+    updateLabelClasses();
+
 })
