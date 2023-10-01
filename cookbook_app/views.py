@@ -44,10 +44,17 @@ class RecipeListView(ListView):
 class SearchRecipeView(View):
     def post(self, request, *args, **kwargs):
         query = request.POST.get("query", "")
+        selected_tags = request.POST.getlist("selected_tags[]")
+        recipes_with_tags = Recipe.objects.all()
+
+        for tag_id in selected_tags:
+            recipes_with_tags = recipes_with_tags.filter(tags__id=tag_id)
+        recipes_with_tags = recipes_with_tags.distinct()
+
         try:
-            search_results = Recipe.objects.filter(name__unaccent__icontains=query).order_by("name")
+            search_results = recipes_with_tags.filter(name__unaccent__icontains=query).order_by("name")
         except django.core.exceptions.FieldError:
-            all_recipes = list(Recipe.objects.order_by("name"))
+            all_recipes = list(recipes_with_tags.order_by("name"))
             search_results = filter(
                 lambda recipe: unidecode(query).lower().strip() in unidecode(recipe.name).lower().strip(),
                 all_recipes)
