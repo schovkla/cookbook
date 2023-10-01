@@ -49,29 +49,33 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 
 
+    const tagSelectors = $('.tag-selector');
     // Update labels classes on click
     function updateLabelClasses() {
-        const checkboxes = document.querySelectorAll('.btn-check');
-        checkboxes.forEach((checkbox) => {
-            const tagId = checkbox.getAttribute('id');
+        tagSelectors.each(function () {
+            const tagId = $(this).attr("id");
+            const isChecked = $(this).is(":checked");
+            // Save checkbox state to cookies
+            sessionStorage.setItem(tagId, isChecked ? "checked" : "unchecked");
             const label = document.querySelector(`[for="${tagId}"]`);
-
-            if (checkbox.checked) {
-                label.classList.remove('bg-secondary');
-                label.classList.add('bg-primary');
+            if (isChecked) {
+                label.classList.remove("bg-secondary");
+                label.classList.add("bg-primary");
             } else {
-                label.classList.remove('bg-primary');
-                label.classList.add('bg-secondary');
+                label.classList.remove("bg-primary");
+                label.classList.add("bg-secondary");
             }
             update_recipe_list();
         });
     }
 
-    const checkboxes = document.querySelectorAll('.btn-check');
-    checkboxes.forEach((checkbox) => {
-        checkbox.addEventListener('change', updateLabelClasses);
+    tagSelectors.each(function () {
+        $(this).on("change", updateLabelClasses);
+        const tagId = $(this).attr("id");
+        const storedValue = sessionStorage.getItem(tagId);
+        if (storedValue === "checked") {
+            $(this).prop("checked", true);
+        }
     });
-
     updateLabelClasses();
-
 })
