@@ -2,3 +2,4 @@
 * pujde pridat k receptu fotka
 * Update to jquery selectors
 * Pridat moznost zalohovani databaze
+* Responzivita na mobilu
