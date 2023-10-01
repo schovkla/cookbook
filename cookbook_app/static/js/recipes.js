@@ -81,9 +81,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function update_tags_visibility() {
         if ($(".tag-selector:checked").length > 0) {
-            $("#tags-list").removeClass("d-none");
+            tagsList.removeClass("d-none");
         } else {
-            $("#tags-list").addClass("d-none");
+            tagsList.addClass("d-none");
         }
     }
 

@@ -5,7 +5,7 @@
         <div class="btn-group" role="group" aria-label="Tags search group">
             {% for tag in tags %}
                 <input type="checkbox" class="btn-check tag-selector" id={{ tag.id }}>
-                <label class="badge rounded-pill align-middle  bg-secondary fs-6 m-1"
+                <label class="badge rounded-pill align-middle bg-secondary fs-6 m-1"
                        for={{ tag.id }}>{{ tag.name }}</label>
             {% endfor %}
         </div>

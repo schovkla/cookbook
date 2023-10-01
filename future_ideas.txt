@@ -1,8 +1,4 @@
 * Ingredience půjde sdružovat do skupin, např. těsto a krém
-* Tagy v receptu budou klikatelné
-* Vyhledavat pujde podle tagu
 * pujde pridat k receptu fotka
-* Rozdelit tagy zvlast u receptu a u vyhledavani
-* Tagy u vyhledavani budou multiple choice
-* Pridat vyhledavani pri psani bez search buttonu
 * Update to jquery selectors
+* Pridat moznost zalohovani databaze

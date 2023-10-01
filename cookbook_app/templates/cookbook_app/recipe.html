@@ -24,5 +24,9 @@
         {% include 'cookbook_app/tags.html' with tags=recipe.tags.all %}
         {% include 'cookbook_app/note.html' %}
     </div>
+    <script>
+        const endpoint_url = "{% url 'search_recipes' %}";
+    </script>
+    <script src="{% static 'js/recipe.js' %}"></script>
 {% endblock %}
 
