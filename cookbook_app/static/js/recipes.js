@@ -78,4 +78,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
     updateLabelClasses();
+
+    function update_tags_visibility() {
+        if ($(".tag-selector:checked").length > 0) {
+            $("#tags-list").removeClass("d-none");
+        } else {
+            $("#tags-list").addClass("d-none");
+        }
+    }
+
+    update_tags_visibility();
 })
