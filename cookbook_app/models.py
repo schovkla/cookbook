@@ -1,5 +1,5 @@
-from django.db import models
 from colorfield.fields import ColorField
+from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_extensions.db.models import TimeStampedModel
 
@@ -16,6 +16,17 @@ class Tag(models.Model):
         return self.name
 
 
+class IngredientGroup(models.Model):
+    name = models.CharField(max_length=127, verbose_name=_("Name"), unique=True)
+
+    class Meta:
+        verbose_name = _("Ingredient Group")
+        verbose_name_plural = _("Ingredient Groups")
+
+    def __str__(self):
+        return self.name
+
+
 class Ingredient(models.Model):
     name = models.CharField(max_length=127, verbose_name=_("Name"), unique=True)
 
@@ -25,7 +36,6 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.name
-
 
 class Step(models.Model):
     description = models.TextField(verbose_name=_("Description"))
@@ -60,6 +70,8 @@ class Amount(models.Model):
                                verbose_name=_("Recipe"))
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name="amount",
                                    verbose_name=_("Ingredient"))
+    group = models.ForeignKey(IngredientGroup, on_delete=models.SET_NULL, null=True, blank=True,
+                              verbose_name=_("Group"))
 
     class Meta:
         verbose_name = _("Amount")
