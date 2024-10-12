@@ -37,6 +37,7 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
 
+
 class Step(models.Model):
     description = models.TextField(verbose_name=_("Description"))
     order = models.IntegerField(verbose_name=_("Order"))

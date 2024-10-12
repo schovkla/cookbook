@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.template.loader import get_template
 
 import cookbook_app.models
-from cookbook_app.models import Tag, Ingredient, Recipe, Unit, Step
+from cookbook_app.models import Tag, Ingredient, Recipe, Unit, Step, IngredientGroup
 
 
 # TODO: Migrate admin to Baton
@@ -19,13 +19,18 @@ class IngredientAdmin(admin.ModelAdmin):
     pass
 
 
+@admin.register(IngredientGroup)
+class IngredientGroupAdmin(admin.ModelAdmin):
+    pass
+
+
 class StepInline(admin.TabularInline):
     model = Step
 
 
 class IngredientInline(admin.TabularInline):
     model = Recipe.ingredients.through
-    fields = ("ingredient", "value", "unit")
+    fields = ("ingredient", "value", "unit", "group")
 
 
 @admin.register(Recipe)
