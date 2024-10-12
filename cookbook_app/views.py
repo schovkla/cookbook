@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 import django.core.exceptions
 from django.shortcuts import render
 from django.views import View
@@ -26,6 +28,16 @@ class RecipeView(DetailView):
             "1.5": 1.5,
             "2": 2,
         }
+
+        recipe = self.get_object()
+        grouped_ingredients = defaultdict(list)
+
+        for amount in recipe.amount.all():
+            group_name = amount.group.name if amount.group else "No Group"
+            grouped_ingredients[group_name].append(amount)
+
+        print(grouped_ingredients)
+        context["grouped_ingredients"] = dict(grouped_ingredients)
         return context
 
 

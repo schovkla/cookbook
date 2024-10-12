@@ -8,24 +8,34 @@
                     class="bi bi-plus-slash-minus"></span></button>
 
         </div>
+
         <div class="list-group-item float-start border-0">
-            <table class="table float-start ">
-                <tbody>
-                {% for ingredient in recipe.ingredients.all %}
-                    <tr>
-                        <td class="d-none ingredient-amount">
-                            <span class="ingredient-value"
-                                  data-default="{{ ingredient.amount.first.value|floatformat }}">
-                            {{ ingredient.amount.first.value|floatformat:"0.##" }}
-                            </span>
-                            {{ ingredient.amount.first.unit.name }}
-                        </td>
-                        <td class="ps-5">{{ ingredient }}</td>
-                    </tr>
+            <div class="d-flex flex-wrap"> <!-- Use flexbox for side-by-side layout -->
+                {% for group_name, amounts in grouped_ingredients.items %}
+                    <div class="me-3 mb-3" style="flex: 1; min-width: 200px;">
+                        {% if group_name != "No Group" %}
+                            <h5 class="font-weight-bold">{{ group_name }}</h5>
+                        {% endif %}
+                        <table class="table">
+                            <tbody>
+                            {% for amount in amounts %}
+                                <tr>
+                                    <td class="d-none ingredient-amount">
+                                        <span class="ingredient-value" data-default="{{ amount.value|floatformat }}">
+                                            {{ amount.value|floatformat:"0.##" }}
+                                        </span>
+                                        {{ amount.unit.name }}
+                                    </td>
+                                    <td class="ps-5">{{ amount.ingredient.name }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 {% endfor %}
-                </tbody>
-            </table>
+            </div>
         </div>
+
 
         <!-- Scaling Modal -->
         <div class="modal fade" id="scalingModal" tabindex="-1" aria-labelledby="scalingModalLabel" aria-hidden="true">
