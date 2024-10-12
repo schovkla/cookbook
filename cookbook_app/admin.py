@@ -31,6 +31,7 @@ class StepInline(admin.TabularInline):
 class IngredientInline(admin.TabularInline):
     model = Recipe.ingredients.through
     fields = ("ingredient", "value", "unit", "group")
+    ordering = ("-group",)
 
 
 @admin.register(Recipe)
