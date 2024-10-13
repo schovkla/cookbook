@@ -1,4 +1,3 @@
-* Ingredience půjde sdružovat do skupin, např. těsto a krém
 * pujde pridat k receptu fotka
 * Update to jquery selectors
 * Pridat moznost zalohovani databaze

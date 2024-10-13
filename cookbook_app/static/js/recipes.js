@@ -1,18 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Handle search form submission via AJAX
-    const searchForm = document.getElementById("search-form");
-    const searchInput = document.getElementById("search-input");
-    const recipeList = document.getElementById("recipe-list");
+    const searchForm = $("#search-form")
+    const searchInput = $("#search-input")
+    const recipeList = $("#recipe-list")
 
     function update_recipe_list() {
-        const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+        const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
         const query = searchInput.value;
         const selectedTags = [];
-        const tagSelectors = document.querySelectorAll('.tag-selector');
+        const tagSelectors = $('.tag-selector');
         tagSelectors.forEach(function (tag_selector) {
             // Check if the checkbox is checked
             if (tag_selector.checked) {
-                const tagId = tag_selector.getAttribute('id');
+                const tagId = tag_selector.attr('id');
                 selectedTags.push(tagId);
             }
         });
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const isChecked = $(this).is(":checked");
             // Save checkbox state to cookies
             sessionStorage.setItem(tagId, isChecked ? "checked" : "unchecked");
-            const label = document.querySelector(`[for="${tagId}"]`);
+            const label = $(`[for="${tagId}"]`);
             if (isChecked) {
                 label.classList.remove("bg-secondary");
                 label.classList.add("bg-primary");
