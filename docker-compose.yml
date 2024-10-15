@@ -10,7 +10,7 @@ services:
       - ${WEB_PORT}:8000
     environment:
       DATABASE_HOST: 192.168.0.5
-      DATABASE_PORT: 5432  # Default PostgreSQL port
+      DATABASE_PORT: 4321  # Default PostgreSQL port
       DATABASE_NAME: cookbook
       DATABASE_USER: python
       DATABASE_PASSWORD: Skytak++102
