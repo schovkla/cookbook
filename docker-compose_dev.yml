@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432  # Default PostgreSQL port
+      DATABASE_NAME: cookbook
+      DATABASE_USER: user
+      DATABASE_PASSWORD: password
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: cookbook
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
