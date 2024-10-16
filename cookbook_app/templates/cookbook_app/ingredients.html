@@ -30,7 +30,7 @@
                                     <td class="d-none ingredient-amount">
                                         <span class="ingredient-value"
                                               data-default="{{ amount.value|custom_floatformat }}">
-                                            {{ amount.value|floatformat:"0.##" }}
+                                            {{ amount.value|custom_floatformat }}
                                         </span>
                                         {{ amount.unit.name }}
                                     </td>
