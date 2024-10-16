@@ -9,10 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const query = searchInput.value;
         const selectedTags = [];
         const tagSelectors = $('.tag-selector');
-        tagSelectors.forEach(function (tag_selector) {
-            // Check if the checkbox is checked
-            if (tag_selector.checked) {
-                const tagId = tag_selector.attr('id');
+        tagSelectors.each(function () {
+            if (this.checked) {
+                const tagId = $(this).attr('id');
                 selectedTags.push(tagId);
             }
         });
@@ -33,12 +32,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    searchForm.addEventListener("submit", function (event) {
+    searchForm.on("submit", function (event) {
         event.preventDefault();
         update_recipe_list();
     });
 
-    searchInput.addEventListener("input", function (event) {
+    searchInput.on("input", function (event) {
         update_recipe_list();
     })
 
@@ -59,11 +58,11 @@ document.addEventListener("DOMContentLoaded", function () {
             sessionStorage.setItem(tagId, isChecked ? "checked" : "unchecked");
             const label = $(`[for="${tagId}"]`);
             if (isChecked) {
-                label.classList.remove("bg-secondary");
-                label.classList.add("bg-primary");
+                label.removeClass("bg-secondary");
+                label.addClass("bg-primary");
             } else {
-                label.classList.remove("bg-primary");
-                label.classList.add("bg-secondary");
+                label.removeClass("bg-primary");
+                label.addClass("bg-secondary");
             }
             update_recipe_list();
         });
