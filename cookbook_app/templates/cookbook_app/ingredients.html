@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load custom_filters %}
 
 <style>
     .table tr:last-child td {
@@ -27,7 +28,8 @@
                             {% for amount in amounts %}
                                 <tr>
                                     <td class="d-none ingredient-amount">
-                                        <span class="ingredient-value" data-default="{{ amount.value|floatformat }}">
+                                        <span class="ingredient-value"
+                                              data-default="{{ amount.value|custom_floatformat }}">
                                             {{ amount.value|floatformat:"0.##" }}
                                         </span>
                                         {{ amount.unit.name }}
