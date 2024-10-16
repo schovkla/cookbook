@@ -1,12 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Handle search form submission via AJAX
-    const searchForm = $("#search-form")
-    const searchInput = $("#search-input")
-    const recipeList = $("#recipe-list")
+    const searchForm = $("#search-form");
+    const searchInput = $("#search-input");
+    const recipeList = $("#recipe-list");
 
     function update_recipe_list() {
         const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
-        const query = searchInput.value;
+        const query = searchInput.val();
         const selectedTags = [];
         const tagSelectors = $('.tag-selector');
         tagSelectors.each(function () {
@@ -15,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 selectedTags.push(tagId);
             }
         });
+
         $.ajax({
             url: endpoint_url,
             method: "POST",
@@ -25,8 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             dataType: "html",
             success: function (data) {
-                recipeList.innerHTML = data;
-            }, error: function (data) {
+                recipeList.html(data);
+            },
+            error: function () {
+                console.log("Error: Unable to update recipes list.");
                 alert('Error while updating recipes list.');
             },
         });
@@ -37,19 +39,16 @@ document.addEventListener("DOMContentLoaded", function () {
         update_recipe_list();
     });
 
-    searchInput.on("input", function (event) {
+    searchInput.on("input", function () {
         update_recipe_list();
-    })
+    });
 
-    let tagsList = $("#tags-list");
-
+    const tagsList = $("#tags-list");
     $("#tags-toggle").click(function () {
         tagsList.toggleClass("d-none");
-    })
-
+    });
 
     const tagSelectors = $('.tag-selector');
-    // Update labels classes on click
     function updateLabelClasses() {
         tagSelectors.each(function () {
             const tagId = $(this).attr("id");
@@ -58,14 +57,12 @@ document.addEventListener("DOMContentLoaded", function () {
             sessionStorage.setItem(tagId, isChecked ? "checked" : "unchecked");
             const label = $(`[for="${tagId}"]`);
             if (isChecked) {
-                label.removeClass("bg-secondary");
-                label.addClass("bg-primary");
+                label.removeClass("bg-secondary").addClass("bg-primary");
             } else {
-                label.removeClass("bg-primary");
-                label.addClass("bg-secondary");
+                label.removeClass("bg-primary").addClass("bg-secondary");
             }
-            update_recipe_list();
         });
+        update_recipe_list(); // Call it once after all labels are updated
     }
 
     tagSelectors.each(function () {
@@ -87,4 +84,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     update_tags_visibility();
-})
+});
