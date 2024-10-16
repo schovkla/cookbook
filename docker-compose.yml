@@ -14,3 +14,4 @@ services:
       DATABASE_NAME: cookbook
       DATABASE_USER: python
       DATABASE_PASSWORD: Skytak++102
+      DATABASE_TYPE: postgresql

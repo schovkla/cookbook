@@ -16,6 +16,7 @@ services:
       DATABASE_NAME: cookbook
       DATABASE_USER: user
       DATABASE_PASSWORD: password
+      DATABASE_TYPE: postgresql
 
   db:
     image: postgres:15
