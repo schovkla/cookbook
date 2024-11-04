@@ -29,12 +29,20 @@
                                 <tr>
                                     <td class="d-none ingredient-amount">
                                         <span class="ingredient-value"
-                                              data-default="{{ amount.value|custom_floatformat }}">
-                                            {{ amount.value|custom_floatformat }}
-                                        </span>
-                                        {{ amount.unit.name }}
+                                              data-default="{% if amount.value is not None %}
+                                                    {{ amount.value|custom_floatformat }} {% else %}''{% endif %}">
+                                                {% if amount.value %}
+                                                    {{ amount.value|custom_floatformat }}
+                                                {% endif %}
+                                            </span>
+                                        {% if amount.unit %}
+                                            {{ amount.unit.name }}
+                                        {% endif %}
                                     </td>
-                                    <td class="ps-5">{{ amount.ingredient.name }}</td>
+
+                                    <td class="ps-5">
+                                        {{ amount.ingredient.name }}
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -77,6 +85,10 @@
                 const amountElements = document.getElementsByClassName('ingredient-amount');
                 for (let i = 0; i < valueElements.length; i++) {
                     let value = parseFloat(valueElements[i].dataset.default) * selectedFactor;
+                    if (isNaN(value)) {
+                        amountElements[i].classList.remove("d-none");
+                        continue;
+                    }
                     if (value % 1 === 0) {
                         value = value.toFixed(0);
                     } else if ((value * 10) % 1 === 0) {
