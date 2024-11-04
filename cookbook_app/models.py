@@ -1,4 +1,5 @@
 from colorfield.fields import ColorField
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_extensions.db.models import TimeStampedModel
@@ -65,8 +66,8 @@ class Unit(models.Model):
 
 
 class Amount(models.Model):
-    value = models.FloatField(default=0, verbose_name=_("Value"))
-    unit = models.ForeignKey(Unit, on_delete=models.CASCADE, related_name="+", verbose_name=_("Unit"))
+    value = models.FloatField(null=True, blank=True, verbose_name=_("Value"))
+    unit = models.ForeignKey(Unit, on_delete=models.CASCADE, related_name="+", verbose_name=_("Unit"), null=True, blank=True)
     recipe = models.ForeignKey("cookbook_app.Recipe", on_delete=models.CASCADE, related_name="amount",
                                verbose_name=_("Recipe"))
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name="amount",
@@ -78,6 +79,13 @@ class Amount(models.Model):
         verbose_name = _("Amount")
         verbose_name_plural = _("Amounts")
 
+    def clean(self):
+        if bool(self.value) ^ bool(self.unit):
+            raise ValidationError(_("Both 'value' and 'unit' must be set together if either is provided."))
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
 class Recipe(TimeStampedModel):
     name = models.CharField(max_length=127, verbose_name=_("Name"), unique=True)
